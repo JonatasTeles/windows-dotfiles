@@ -1,0 +1,170 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "user": "#FFD700",
+    "folder": "#B983FF",
+    "git": "#74C7EC",
+    "python": "#F9E2AF",
+    "node": "#A6E3A1",
+    "docker": "#89DCEB",
+    "java": "#FAB387",
+    "rust": "#F5A97F",
+    "go": "#94E2D5",
+    "error": "#F38BA8",
+    "warning": "#FAB387",
+    "ssh": "#89B4FA",
+    "text": "#CDD6F4",
+    "separator": "#6C7086"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "type": "prompt",
+      "segments": [
+        {
+          "type": "session",
+          "style": "plain",
+          "foreground": "p:user",
+          "background": "transparent",
+          "template": "👤 {{ .UserName }} "
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "p:folder",
+          "background": "transparent",
+          "options": {
+            "style": "folder",
+            "home_icon": "~",
+            "folder_separator_icon": "/"
+          },
+          "template": "<p:separator>│</> 📁 {{ .Path }} "
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "p:git",
+          "background": "transparent",
+          "options": {
+            "branch_template": "{{ trunc 25 .Branch }}",
+            "fetch_status": true
+          },
+          "template": "<p:separator>│</> 🌿 {{ .HEAD }}{{ if .Working.Changed }} ✎{{ end }}{{ if .Staging.Changed }} ●{{ end }}{{ if gt .StashCount 0 }} ⚑{{ .StashCount }}{{ end }} "
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:python",
+          "background": "transparent",
+          "options": {
+            "fetch_virtual_env": false,
+            "display_mode": "files"
+          },
+          "template": "<p:separator>│</> 🐍 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+        },
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "p:node",
+          "background": "transparent",
+          "options": {
+            "fetch_version": true
+          },
+          "template": "<p:separator>│</> 🟢 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} "
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:docker",
+          "background": "transparent",
+          "template": "{{ if or (glob \"Dockerfile\") (glob \"docker-compose*.yml\") (glob \"docker-compose*.yaml\") (glob \"compose.yaml\") (glob \"compose.yml\") }}<p:separator>│</> 🐳 {{ end }}"
+        },
+        {
+          "type": "java",
+          "style": "plain",
+          "foreground": "p:java",
+          "background": "transparent",
+          "options": {
+            "display_mode": "files",
+            "fetch_version": true
+          },
+          "template": "<p:separator>│</> ☕ {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+        },
+        {
+          "type": "rust",
+          "style": "plain",
+          "foreground": "p:rust",
+          "background": "transparent",
+          "options": {
+            "fetch_version": true
+          },
+          "template": "<p:separator>│</> 🦀 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "p:go",
+          "background": "transparent",
+          "options": {
+            "fetch_version": true
+          },
+          "template": "<p:separator>│</> 🐹 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+        }
+      ]
+    },
+    {
+      "alignment": "right",
+      "type": "prompt",
+      "segments": [
+        {
+          "type": "session",
+          "style": "plain",
+          "foreground": "p:ssh",
+          "background": "transparent",
+          "template": "{{ if .SSHSession }}🌐 SSH {{ end }}"
+        },
+        {
+          "type": "root",
+          "style": "plain",
+          "foreground": "p:warning",
+          "background": "transparent",
+          "template": "⚡ Admin "
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "p:text",
+          "background": "transparent",
+          "options": {
+            "threshold": 2000
+          },
+          "template": "⏱ {{ .FormattedMs }} "
+        },
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "p:error",
+          "background": "transparent",
+          "template": "✖ Exit {{ .Code }} "
+        }
+      ]
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "type": "prompt",
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:text",
+          "background": "transparent",
+          "template": "❯ "
+        }
+      ]
+    }
+  ],
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "final_space": true,
+  "version": 4
+}

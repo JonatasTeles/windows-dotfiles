@@ -1,6 +1,6 @@
 # install.ps1 - Bootstrap do ambiente Windows (windows-dotfiles)
 
-Write-Host "Configurando ambiente Eclipse..." -ForegroundColor Cyan
+Write-Host "🌑 Configurando ambiente Eclipse..." -ForegroundColor Cyan
 
 # ================================
 # 1. Ferramentas via winget
@@ -12,29 +12,31 @@ $wingetPackages = @(
     "BurntSushi.ripgrep.MSVC",
     "sharkdp.fd",
     "sharkdp.bat",
-    "Neovim.Neovim",
-    "junegunn.fzf"
+    "Neovim.Neovim"
 )
 
 foreach ($pkg in $wingetPackages) {
-    Write-Host "-> Instalando $pkg..." -ForegroundColor Yellow
+    Write-Host "→ Instalando $pkg..." -ForegroundColor Yellow
     winget install --id $pkg -s winget --accept-package-agreements --accept-source-agreements
 }
 
 # ================================
-# 2. Modulos do PowerShell
+# 2. Módulos do PowerShell
 # ================================
 $modules = @("Terminal-Icons", "PSReadLine", "PSFzf")
 
 foreach ($mod in $modules) {
     if (-not (Get-Module -ListAvailable -Name $mod)) {
-        Write-Host "-> Instalando modulo $mod..." -ForegroundColor Yellow
+        Write-Host "→ Instalando módulo $mod..." -ForegroundColor Yellow
         Install-Module -Name $mod -Scope CurrentUser -Force -SkipPublisherCheck
     }
 }
 
+# PSFzf também precisa do binário fzf
+winget install --id junegunn.fzf -s winget --accept-package-agreements --accept-source-agreements
+
 # ================================
-# 3. Conecta o $PROFILE ao repositorio
+# 3. Conecta o $PROFILE ao repositório
 # ================================
 $profileDir = Split-Path $PROFILE
 if (-not (Test-Path $profileDir)) {
@@ -50,5 +52,5 @@ oh-my-posh init pwsh --config "$repoRoot\oh-my-posh\eclipse.omp.json" | Invoke-E
 
 Set-Content -Path $PROFILE -Value $profileContent -Force
 
-Write-Host "Tudo pronto! Profile configurado em: $PROFILE" -ForegroundColor Green
+Write-Host "✅ Tudo pronto! Profile configurado em: $PROFILE" -ForegroundColor Green
 Write-Host "Reinicie o terminal (ou rode '. `$PROFILE') para aplicar." -ForegroundColor Yellow
