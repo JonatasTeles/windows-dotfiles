@@ -12,8 +12,6 @@ Eclipse é um tema próprio para o Oh My Posh, inspirado em ambientes Linux mode
 - **Elegância** — ícones e cores de texto discretas, sem blocos powerline pesados
 - **Modularidade** — cada funcionalidade foi adicionada aos poucos, com propósito
 
-Mais detalhes de filosofia e paleta em `oh-my-posh/README.md` (quando existir) e no próprio `oh-my-posh/eclipse.omp.json`.
-
 ## 📁 Estrutura do repositório
 
 ```
@@ -56,9 +54,9 @@ windows-dotfiles
 | Visualização de arquivo | bat |
 | Editor | Neovim |
 
-Todas instaladas automaticamente pelo `install.ps1`.
+Todas são instaladas automaticamente pelo `install.ps1`.
 
-## 🚀 Setup do zero (nova máquina / reinstalação do Windows)
+## 🚀 Como instalar do zero
 
 ### 1. Instalar o Git
 
@@ -66,12 +64,10 @@ Todas instaladas automaticamente pelo `install.ps1`.
 winget install Git.Git -s winget
 ```
 
-Feche e reabra o terminal.
-
 ### 2. Clonar o repositório
 
 ```powershell
-git clone https://github.com/SEU-USUARIO/windows-dotfiles.git $HOME\projects\windows-dotfiles
+git clone https://github.com/JonatasTeles/windows-dotfiles.git
 ```
 
 ### 3. Rodar o instalador
@@ -89,7 +85,7 @@ O script cuida de:
 ### 4. Recarregar o terminal
 
 ```powershell
-. $PROFILE
+reload
 ```
 
 Ou feche e abra o Windows Terminal de novo.
